@@ -1,12 +1,14 @@
 package com.castro.controller;
 
 import com.castro.dto.Employee;
+import com.castro.dto.EmployeeIdReq;
 import com.castro.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -82,6 +84,17 @@ public class EmployeeController {
             Map<Long, Employee> employeeMap= employeeService.getAll();
             return new ResponseEntity<>(employeeMap, HttpStatus.OK);
         }catch (Exception e){
+            log.error("find all failed");
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @PostMapping(value = "/empl/find/id")
+    public ResponseEntity<Object> findAllEmpById(@RequestBody EmployeeIdReq req) {
+        try {
+            List<Employee> employees = employeeService.findEmployeeById(req.getId());
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        } catch (Exception e) {
             log.error("find all failed");
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
