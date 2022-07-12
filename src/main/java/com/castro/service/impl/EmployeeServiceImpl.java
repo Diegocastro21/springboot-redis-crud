@@ -26,6 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         hashOperations = redisTemplate.opsForHash();
     }
 
+
     @Override
     public void save(Employee employee) {
         hashOperations.put(EMPLOYEE_KEY, employee.getId(), employee);
