@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static final String EMPLOYEE_KEY = "";
+    private static final String EMPLOYEE_KEY = "Employee";
 
     private final RedisTemplate<String, Object> redisTemplate;
     private HashOperations<String, Long, Employee> hashOperations;
@@ -28,36 +28,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(Employee employee) {
-
+        hashOperations.put(EMPLOYEE_KEY, employee.getId(), employee);
     }
 
     @Override
     public void update(Employee employee) {
-
+        hashOperations.put(EMPLOYEE_KEY, employee.getId(), employee);
     }
 
     @Override
     public void delete(Long id) {
-
+        hashOperations.delete(EMPLOYEE_KEY, id);
     }
 
     @Override
     public Employee findById(Long id) {
-        return null;
+        return hashOperations.get(EMPLOYEE_KEY, id);
     }
 
     @Override
     public List<Employee> getAllEmployees(String key) {
-        return null;
+        return hashOperations.values(key);
     }
 
     @Override
     public List<Employee> findEmployeeById(List<Long> id) {
-        return null;
+        return hashOperations.multiGet(EMPLOYEE_KEY, id);
     }
 
     @Override
     public Map<Long, Employee> getAll() {
-        return null;
+        return hashOperations.entries(EMPLOYEE_KEY);
     }
 }
