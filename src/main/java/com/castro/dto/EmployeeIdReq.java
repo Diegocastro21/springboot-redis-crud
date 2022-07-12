@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeIdReq implements Serializable {
 
-    private static final long serialVersionUID = -8571454453894445935L;
+    private static final long serialVersionUID = 1L;
     @JsonProperty("employees")
     private List<Long> id;
 }
