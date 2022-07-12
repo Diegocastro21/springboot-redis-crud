@@ -2,14 +2,18 @@ package com.castro.service.impl;
 
 import com.castro.dto.Employee;
 import com.castro.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static final String EMPLOYEE_KEY = "Employee";
